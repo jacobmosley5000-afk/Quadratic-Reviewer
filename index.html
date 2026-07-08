@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Quadratic Equation Flashcard Reviewer</title>
+
+<style>
+
+/* ===============================
+   GENERAL STYLE
+================================ */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+    background:#eef6ff;
+    color:#123;
+
+    transition:.3s;
+
+}
+
+
+body.dark{
+
+    background:#101827;
+    color:white;
+
+}
+
+
+.container{
+
+    max-width:950px;
+    margin:auto;
+    padding:20px;
+
+}
+
+
+/* ===============================
+   HEADER
+================================ */
+
+
+header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+
+}
+
+
+header h1{
+
+    color:#0866d6;
+
+}
+
+
+body.dark h1{
+
+    color:#6ea8fe;
+
+}
+
+
+/* ===============================
+   BUTTONS
+================================ */
+
+
+button{
+
+    padding:12px 20px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-weight:bold;
+    margin:5px;
+
+    transition:.3s;
+
+}
+
+
+.blue{
+
+    background:#0866d6;
+    color:white;
+
+}
+
+
+.blue:hover{
+
+    background:#064ea8;
+    transform:translateY(-2px);
+
+}
+
+
+.light{
+
+    background:white;
+    color:#0866d6;
+    border:2px solid #0866d6;
+
+}
+
+
+body.dark .light{
+
+    background:#1e293b;
+    color:white;
+
+}
+
+
+/* ===============================
+   SECTIONS
+================================ */
+
+
+.center{
+
+    text-align:center;
+
+}
+
+
+.hidden{
+
+    display:none;
+
+}
+
+
+
+section{
+
+    animation:fade .5s;
+
+}
+
+
+/* ===============================
+   DASHBOARD
+================================ */
+
+
+#home{
+
+    padding:70px 20px;
+
+}
+
+
+#home h2{
+
+    font-size:35px;
+    margin-bottom:20px;
+
+}
+
+
+#home p{
+
+    font-size:18px;
+    line-height:1.5;
+
+}
+
+
+
+/* ===============================
+   PROGRESS BAR
+================================ */
+
+
+.progress{
+
+    height:15px;
+    background:#cfe2ff;
+    border-radius:20px;
+    overflow:hidden;
+
+}
+
+
+.bar{
+
+    height:100%;
+    width:0%;
+    background:#0866d6;
+
+    transition:.4s;
+
+}
+
+
+/* ===============================
+   FLASHCARD
+================================ */
+
+
+.cardbox{
+
+    display:flex;
+    justify-content:center;
+    margin:40px 0;
+
+    perspective:1000px;
+
+}
+
+
+.card{
+
+    width:360px;
+    height:230px;
+
+    position:relative;
+
+    transform-style:preserve-3d;
+
+    transition:.7s;
+
+    cursor:pointer;
+
+}
+
+
+
+.card.flip{
+
+    transform:rotateY(180deg);
+
+}
+
+
+
+.side{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:20px;
+
+    text-align:center;
+
+    border-radius:20px;
+
+    backface-visibility:hidden;
+
+    box-shadow:0 10px 25px #0003;
+
+    font-size:21px;
+
+}
+
+
+
+.front{
+
+    background:white;
+    color:#0866d6;
+
+}
+
+
+
+.back{
+
+    background:#0866d6;
+    color:white;
+
+    transform:rotateY(180deg);
+
+}
+
+
+
+body.dark .front{
+
+    background:#1e293b;
+    color:white;
+
+}
+
+
+
+/* ===============================
+   QUIZ
+================================ */
+
+
+.quiz{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    margin-top:20px;
+
+    box-shadow:0 5px 20px #0003;
+
+}
+
+
+
+body.dark .quiz{
+
+    background:#1e293b;
+
+}
+
+
+
+.option{
+
+    display:block;
+
+    width:100%;
+
+    text-align:left;
+
+    background:white;
+
+    color:#0866d6;
+
+    border:2px solid #0866d6;
+
+}
+
+
+
+body.dark .option{
+
+    background:#101827;
+
+    color:white;
+
+}
+
+
+
+/* ===============================
+   SCORE
+================================ */
+
+
+.score{
+
+    font-size:60px;
+
+    color:#0866d6;
+
+    margin:20px;
+
+}
+
+
+
+/* ===============================
+   ANIMATION
+================================ */
+
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+
+
+/* RESPONSIVE */
+
+
+@media(max-width:600px){
+
+.card{
+
+width:95%;
+
+}
+
+#home h2{
+
+font-size:28px;
+
+}
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<header>
+
+<h1>
+Quadratic Equation Reviewer
+</h1>
+
+
+<button class="light" onclick="darkMode()">
+
+🌙
+
+</button>
+
+
+</header>
+
+
+
+<!-- DASHBOARD -->
+
+
+<section id="home" class="center">
+
+
+<h2>
+Master Quadratic Equations
+</h2>
+
+
+<p>
+Study concepts using flashcards then test your knowledge with a quiz.
+</p>
+
+
+<br>
+
+
+<button class="blue" onclick="startReview()">
+
+Start Reviewing
+
+</button>
+
+
+</section>
+
+
+
+<!-- FLASHCARD AREA -->
+
+
+<section id="review" class="hidden">
+
+
+<div class="progress">
+
+<div id="bar" class="bar"></div>
+
+</div>
+
+
+
+<div class="cardbox">
+
+
+<div id="card" class="card" onclick="flipCard()">
+
+
+
+<div id="front" class="side front">
+
+</div>
+
+
+<div id="back" class="side back">
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<div class="center">
+
+
+<button class="light" onclick="previousCard()">
+
+Previous
+
+</button>
+
+
+<button class="light" onclick="nextCard()">
+
+Next
+
+</button>
+
+
+<button class="light" onclick="shuffleCard()">
+
+Shuffle
+
+</button>
+
+
+<button class="light" onclick="restartCard()">
+
+Restart
+
+</button>
+
+
+<br>
+
+
+<button class="blue" onclick="startQuiz()">
+
+Take Quiz
+
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- QUIZ AREA -->
+
+
+<section id="quiz" class="quiz hidden">
+
+
+<h2 id="question"></h2>
+
+
+<div id="choices"></div>
+
+
+</section>
+
+
+
+<!-- RESULT AREA -->
+
+
+<section id="result" class="center hidden">
+
+
+<h2>
+Quiz Completed!
+</h2>
+
+
+<div id="score" class="score">
+
+</div>
+
+
+<p id="message">
+
+</p>
+
+
+<br>
+
+
+<button class="blue" onclick="restartAll()">
+
+Review Again
+
+</button>
+
+
+<button class="light" onclick="showAnswerKey()">
+
+Answer Key
+
+</button>
+
+
+</section>
+<script>
+
+// ===============================
+// FLASHCARD DATA
+// ===============================
+
+const flashcards = [
+
+[
+"What is a quadratic equation?",
+"An equation with degree 2, usually written as ax² + bx + c = 0."
+],
+
+[
+"What is the quadratic formula?",
+"x = (-b ± √(b² - 4ac)) / 2a"
+],
+
+[
+"What is the discriminant?",
+"The expression b² - 4ac that tells the number of solutions."
+],
+
+[
+"What happens when the discriminant is positive?",
+"The equation has two real solutions."
+],
+
+[
+"What happens when the discriminant is zero?",
+"The equation has one repeated real solution."
+],
+
+[
+"What happens when the discriminant is negative?",
+"The equation has no real solutions."
+],
+
+[
+"What is the vertex form?",
+"y = a(x-h)² + k"
+],
+
+[
+"What is factoring?",
+"Writing an expression as a product of simpler expressions."
+],
+
+[
+"What is the axis of symmetry?",
+"x = -b / 2a"
+],
+
+[
+"What does a represent in ax²+bx+c=0?",
+"The coefficient of x²."
+]
+
+];
+
+
+
+let cards=[...flashcards];
+
+let cardIndex=0;
+
+
+
+// ===============================
+// FLASHCARD FUNCTIONS
+// ===============================
+
+
+function startReview(){
+
+home.classList.add("hidden");
+
+review.classList.remove("hidden");
+
+showCard();
+
+}
+
+
+
+function showCard(){
+
+card.classList.remove("flip");
+
+
+front.innerHTML=cards[cardIndex][0];
+
+back.innerHTML=cards[cardIndex][1];
+
+
+bar.style.width=
+
+((cardIndex+1)/cards.length*100)+"%";
+
+}
+
+
+
+function flipCard(){
+
+card.classList.toggle("flip");
+
+}
+
+
+
+function nextCard(){
+
+cardIndex++;
+
+if(cardIndex>=cards.length){
+
+cardIndex=0;
+
+}
+
+showCard();
+
+}
+
+
+
+function previousCard(){
+
+cardIndex--;
+
+if(cardIndex<0){
+
+cardIndex=cards.length-1;
+
+}
+
+showCard();
+
+}
+
+
+
+function shuffleCard(){
+
+cards.sort(()=>Math.random()-0.5);
+
+cardIndex=0;
+
+showCard();
+
+}
+
+
+
+function restartCard(){
+
+cards=[...flashcards];
+
+cardIndex=0;
+
+showCard();
+
+}
+
+
+
+// ===============================
+// DARK MODE
+// ===============================
+
+
+function darkMode(){
+
+document.body.classList.toggle("dark");
+
+}
+
+
+
+
+// ===============================
+// QUIZ QUESTIONS
+// ===============================
+
+
+const questions=[
+
+
+{
+
+q:"Which is the standard form of a quadratic equation?",
+
+choices:[
+
+"ax²+bx+c=0",
+
+"x+y=10",
+
+"a+b=c",
+
+"x²=y"
+
+],
+
+answer:0
+
+},
+
+
+
+{
+
+q:"What is the discriminant formula?",
+
+choices:[
+
+"a²+b²+c²",
+
+"b²-4ac",
+
+"2a+b",
+
+"x+y"
+
+],
+
+answer:1
+
+},
+
+
+
+{
+
+q:"A positive discriminant means:",
+
+choices:[
+
+"No solution",
+
+"One solution",
+
+"Two real solutions",
+
+"Infinite solutions"
+
+],
+
+answer:2
+
+},
+
+
+
+{
+
+q:"What is the first step in factoring a quadratic equation?",
+
+choices:[
+
+"Find factors",
+
+"Remove x",
+
+"Divide by zero",
+
+"Change the variable"
+
+],
+
+answer:0
+
+},
+
+
+
+{
+
+q:"What is the coefficient of x² in 3x²+5x-2?",
+
+choices:[
+
+"5",
+
+"-2",
+
+"3",
+
+"2"
+
+],
+
+answer:2
+
+},
+
+
+
+{
+
+q:"The quadratic formula finds:",
+
+choices:[
+
+"Angles",
+
+"Roots or solutions",
+
+"Area",
+
+"Slope"
+
+],
+
+answer:1
+
+},
+
+
+
+{
+
+q:"A negative discriminant means:",
+
+choices:[
+
+"Two real solutions",
+
+"No real solutions",
+
+"One solution",
+
+"Two graphs"
+
+],
+
+answer:1
+
+},
+
+
+
+{
+
+q:"The graph of a quadratic equation is a:",
+
+choices:[
+
+"Circle",
+
+"Triangle",
+
+"Parabola",
+
+"Rectangle"
+
+],
+
+answer:2
+
+},
+
+
+
+{
+
+q:"The axis of symmetry formula is:",
+
+choices:[
+
+"x=-b/2a",
+
+"x=a+b",
+
+"x=bc",
+
+"x=2ab"
+
+],
+
+answer:0
+
+},
+
+
+
+{
+
+q:"In ax²+bx+c=0, c is the:",
+
+choices:[
+
+"Constant term",
+
+"Exponent",
+
+"Variable",
+
+"Coefficient of x²"
+
+],
+
+answer:0
+
+}
+
+
+];
+
+
+// QUIZ VARIABLES
+
+let quizIndex=0;
+
+let scoreValue=0;
+
+
+
+function startQuiz(){
+
+review.classList.add("hidden");
+
+quiz.classList.remove("hidden");
+
+quizIndex=0;
+
+scoreValue=0;
+
+loadQuestion();
+
+}
+
+
+
+function loadQuestion(){
+
+
+let current=questions[quizIndex];
+
+
+question.innerHTML=
+
+(quizIndex+1)+". "+current.q;
+
+
+
+choices.innerHTML="";
+
+
+
+current.choices.forEach((choice,index)=>{
+
+
+let button=document.createElement("button");
+
+
+button.className="option";
+
+
+button.innerHTML=choice;
+
+
+
+button.onclick=function(){
+
+checkAnswer(index);
+
+};
+
+
+
+choices.appendChild(button);
+
+
+
+});
+
+
+}
+
+// ===============================
+// QUIZ CHECKING
+// ===============================
+
+
+function checkAnswer(selected){
+
+
+if(selected===questions[quizIndex].answer){
+
+scoreValue++;
+
+}
+
+
+quizIndex++;
+
+
+if(quizIndex<questions.length){
+
+loadQuestion();
+
+}
+
+else{
+
+finishQuiz();
+
+}
+
+
+}
+
+
+
+
+// ===============================
+// SCORE PAGE
+// ===============================
+
+
+function finishQuiz(){
+
+
+quiz.classList.add("hidden");
+
+
+result.classList.remove("hidden");
+
+
+
+score.innerHTML=
+
+scoreValue+" / 10";
+
+
+
+if(scoreValue===10){
+
+
+message.innerHTML=
+
+"🏆 Perfect Score! You are a Quadratic Equation Master!";
+
+
+}
+
+else if(scoreValue>=7){
+
+
+message.innerHTML=
+
+"⭐ Great job! Keep practicing and improving!";
+
+
+}
+
+else{
+
+
+message.innerHTML=
+
+"💪 Good effort! Review the flashcards and try again!";
+
+
+}
+
+
+}
+
+
+
+
+// ===============================
+// ANSWER KEY
+// ===============================
+
+
+function showAnswerKey(){
+
+
+result.classList.add("hidden");
+
+
+answerKey.classList.remove("hidden");
+
+
+}
+
+
+
+
+function backHome(){
+
+
+answerKey.classList.add("hidden");
+
+
+home.classList.remove("hidden");
+
+
+}
+
+
+
+
+// ===============================
+// RESTART EVERYTHING
+// ===============================
+
+
+function restartAll(){
+
+
+result.classList.add("hidden");
+
+
+home.classList.remove("hidden");
+
+
+restartCard();
+
+
+}
+
+
+
+// ===============================
+// ANSWER KEY SECTION
+// ===============================
+
+</script>
+
+
+
+<section id="answerKey" class="quiz hidden">
+
+
+<h2>📌 Quadratic Equation Answer Key</h2>
+
+
+<ol>
+
+
+<li>
+<b>A</b> - ax²+bx+c=0
+</li>
+
+
+<li>
+<b>B</b> - b²-4ac
+</li>
+
+
+<li>
+<b>C</b> - Two real solutions
+</li>
+
+
+<li>
+<b>A</b> - Find factors
+</li>
+
+
+<li>
+<b>C</b> - 3
+</li>
+
+
+<li>
+<b>B</b> - Roots or solutions
+</li>
+
+
+<li>
+<b>B</b> - No real solutions
+</li>
+
+
+<li>
+<b>C</b> - Parabola
+</li>
+
+
+<li>
+<b>A</b> - x=-b/2a
+</li>
+
+
+<li>
+<b>A</b> - Constant term
+</li>
+
+
+</ol>
+
+
+<br>
+
+
+<div class="center">
+
+
+<button class="blue" onclick="backHome()">
+
+Back to Home
+
+</button>
+
+
+</div>
+
+
+</section>
+
+
+
+<footer class="center">
+
+<br><br>
+
+Quadratic Equation Flashcard Reviewer
+
+</footer>
+
+
+</div>
+
+
+</body>
+
+</html>
+
+
+
+
